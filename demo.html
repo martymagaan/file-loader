@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>File Loader Demo</title>
+</head>
+<body>
+
+<style>
+#myTextArea {
+  display: block;
+  margin: 0 0 10px 0;
+}
+</style>
+
+<textarea id="myTextArea">This is a bunch of text.</textarea>
+<button type="button" onclick="downloadFile()">Download</button>
+<button type="button" onclick="uploadFile()">Upload</button>
+<p id="uploaded-file-info"></p>
+
+<script src="file-loader.js"></script>
+<script>
+function downloadFile() {
+  var content = document.getElementById('myTextArea').value;
+  fileLoader.download('file.txt', content);
+}
+
+function uploadFile() {
+  fileLoader.upload(handleUploadedData);
+}
+
+function handleUploadedData(data) {
+  var element = document.getElementById('uploaded-file-info');
+  element.innerHTML = '<b>Filename:</b> ' + data.name;
+  element.innerHTML += '<br><b>Size:</b> ' + data.size + ' bytes';
+  element.innerHTML += '<br><b>Content:</b> ' + data.content;
+}
+</script>
+
+</body>
+</html>
